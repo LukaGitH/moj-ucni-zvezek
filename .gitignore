@@ -1,0 +1,6 @@
+Slike/
+Slike/**
+.agents/
+.codex/
+.DS_Store
+Thumbs.db

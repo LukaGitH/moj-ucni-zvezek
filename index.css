@@ -1,0 +1,1545 @@
+/* Uvozi otrokom prijazno in zaobljeno pisavo Fredoka iz Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+/* --- GLOBALNE SPREMENLJIVKE IN TEME --- */
+:root {
+  --font-family: 'Fredoka', sans-serif;
+  
+  /* Privzeta tema: miren delovni zvezek */
+  --bg-gradient: linear-gradient(180deg, #eef6ff 0%, #f7fbff 48%, #fff8ee 100%);
+  --panel-bg: rgba(255, 255, 255, 0.94);
+  --primary-color: #24527a;
+  --primary-light: #6ca6d8;
+  --accent-color: #d96c3b;
+  --text-color: #243447;
+  --card-bg: #ffffff;
+  --border-color: #b7d3ea;
+  --shadow-color: rgba(36, 82, 122, 0.14);
+  --btn-hover: #477fae;
+  
+  --success-color: #4caf50;
+  --error-color: #f44336;
+}
+
+/* Tema: Vesolje 🚀 */
+[data-theme="space"] {
+  --bg-gradient: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+  --panel-bg: rgba(27, 38, 59, 0.85);
+  --primary-color: #9d4edd;
+  --primary-light: #c77dff;
+  --accent-color: #00f5d4;
+  --text-color: #e0aaff;
+  --card-bg: #1e293b;
+  --border-color: #5a189a;
+  --shadow-color: rgba(157, 78, 221, 0.3);
+  --btn-hover: #7b2cbf;
+}
+
+/* Tema: Dinozavri/Puščava 🦖 */
+[data-theme="dino"] {
+  --bg-gradient: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  --panel-bg: rgba(255, 255, 255, 0.85);
+  --primary-color: #d84315;
+  --primary-light: #ff8a65;
+  --accent-color: #4caf50;
+  --text-color: #4e342e;
+  --card-bg: #ffffff;
+  --border-color: #ffcc80;
+  --shadow-color: rgba(216, 67, 21, 0.15);
+  --btn-hover: #ff5722;
+}
+
+/* Tema: Ocean 🌊 */
+[data-theme="ocean"] {
+  --bg-gradient: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  --panel-bg: rgba(255, 255, 255, 0.85);
+  --primary-color: #0077b6;
+  --primary-light: #90e0ef;
+  --accent-color: #ffb703;
+  --text-color: #03045e;
+  --card-bg: #ffffff;
+  --border-color: #80deea;
+  --shadow-color: rgba(0, 119, 182, 0.15);
+  --btn-hover: #0096c7;
+}
+
+/* --- OSNOVNI STILI --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none; /* Prepreči označevanje besedila med klikanjem */
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 18px 20px 24px;
+  overflow-x: hidden;
+  transition: background 0.5s ease;
+}
+
+/* --- GLAVA APLIKACIJE --- */
+header {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  padding: 12px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  margin-bottom: 18px;
+  transition: all 0.3s ease;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid var(--primary-light);
+  background: white;
+}
+
+h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.stars-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--card-bg);
+  padding: 8px 18px;
+  border-radius: 12px;
+  border: 2px solid #ffd700;
+  color: #d4af37;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.15);
+}
+
+.star-icon {
+  font-size: 1.8rem;
+  animation: starPulse 2s infinite ease-in-out;
+}
+
+.theme-selector select, .control-btn {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  padding: 8px 15px;
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  outline: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.3rem;
+}
+
+.control-btn:hover, .theme-selector select:hover {
+  transform: translateY(-2px);
+  background: var(--primary-light);
+  color: white;
+}
+
+/* --- VIZUALNI TRAK ZA NAVODILO (INSTRUCTION BANNER) --- */
+.visual-instruction-banner {
+  width: 100%;
+  max-width: 1000px;
+  background: #fff8e8;
+  color: var(--text-color);
+  text-align: left;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  animation: fadeIn 0.4s ease;
+  border: 1px solid #f0cf9a;
+  border-left: 8px solid var(--accent-color);
+}
+
+/* --- OSREDNJI PANEL APLIKACIJE --- */
+main {
+  width: 100%;
+  max-width: 1000px;
+  flex: 1;
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 12px 28px var(--shadow-color);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  transition: all 0.3s ease;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --- GLAVNI MENI (Slovenščina vs Matematika) --- */
+.main-menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.menu-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 10px 20px var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.menu-card:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+  border-color: var(--primary-color);
+}
+
+.menu-card.slovenscina {
+  border-color: #ff7043;
+}
+.menu-card.slovenscina:hover {
+  background: #fdf2ee;
+}
+.menu-card.matematika {
+  border-color: #29b6f6;
+}
+.menu-card.matematika:hover {
+  background: #e1f5fe;
+}
+
+.menu-icon {
+  min-width: 104px;
+  min-height: 78px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 25px, rgba(36, 82, 122, 0.12) 26px 27px),
+    #ffffff;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+
+.menu-card h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.menu-card p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* --- PODMENI IZBIRE IGR (SUB-MENU) --- */
+.submenu-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.back-btn {
+  align-self: flex-start;
+  font-family: var(--font-family);
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  padding: 10px 22px;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  transform: translateX(-5px);
+  background: var(--primary-light);
+  color: white;
+}
+
+.game-select-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.game-section {
+  width: 100%;
+}
+
+.game-section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.game-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.game-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 22px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 12px var(--shadow-color);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 18px var(--shadow-color);
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.game-card-icon {
+  min-width: 68px;
+  height: 48px;
+  padding: 0 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+  background: #f8fbff;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.65rem;
+  font-weight: 700;
+}
+
+.game-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* --- IGRALNO OBMOČJE (GAME ZONE) --- */
+.game-play-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed var(--border-color);
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+.game-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.game-canvas {
+  width: 100%;
+  min-height: 380px;
+  background:
+    repeating-linear-gradient(0deg, rgba(108, 166, 216, 0.16) 0 1px, transparent 1px 34px),
+    linear-gradient(90deg, rgba(217, 108, 59, 0.16) 0 1px, transparent 1px),
+    #ffffff;
+  background-position: 0 18px, 34px 0, 0 0;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+  position: relative;
+}
+
+.game-canvas.task-completed {
+  pointer-events: none;
+}
+
+.empty-task-message {
+  max-width: 520px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 22px;
+  color: var(--text-color);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* --- SKUPNI ELEMENTI IGRE --- */
+.visual-emoji {
+  font-size: 5rem;
+  margin-bottom: 15px;
+  animation: floatEmoji 3s infinite ease-in-out;
+}
+
+/* --- IGRA 1: ANAGRAMI (Z DODATNIMI ČRRAMI) --- */
+.slots-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  min-height: 70px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.letter-slot {
+  width: 60px;
+  height: 60px;
+  border: 3px dashed var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.letter-slot.filled {
+  border-style: solid;
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+  color: white;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.letters-pool {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.letter-card {
+  width: 60px;
+  height: 60px;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.letter-card:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+  color: white;
+}
+
+.letter-card.used {
+  opacity: 0.2;
+  transform: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* --- IGRA 2: MANJKAJOČE ČRKE --- */
+.word-with-missing {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.missing-slot {
+  width: 70px;
+  height: 70px;
+  border: 3px dashed var(--accent-color);
+  border-radius: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  background: rgba(255, 152, 0, 0.05);
+}
+
+.choices-pool {
+  display: flex;
+  gap: 20px;
+}
+
+.choice-card {
+  width: 70px;
+  height: 70px;
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 0 6px 12px var(--shadow-color);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.choice-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: white;
+}
+
+/* --- IGRA 3: POVEZOVANJE KARTIC S KANVASOM 🎨 --- */
+.matching-columns-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  padding: 10px 0;
+}
+
+.matching-canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* ZELO POMEMBNO: klikanje prehaja skozi kanvas na kartice spodaj! */
+  z-index: 10;
+}
+
+.matching-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 5;
+}
+
+.matching-card {
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 18px;
+  padding: 15px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s ease;
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.matching-card:hover {
+  transform: scale(1.02);
+  border-color: var(--primary-color);
+}
+
+.matching-card.selected {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.matching-card.matched {
+  border-color: var(--success-color);
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--success-color);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* --- IZBERI PRAVO BESEDO --- */
+.word-choice-container,
+.letter-search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.word-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.word-choice-btn,
+.letter-search-word {
+  font-family: var(--font-family);
+  min-height: 62px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1.45rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s ease;
+}
+
+.word-choice-btn:hover,
+.letter-search-word:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
+}
+
+.word-choice-btn.correct,
+.letter-search-word.correct {
+  border-color: var(--success-color);
+  background: rgba(76, 175, 80, 0.14);
+  color: var(--success-color);
+}
+
+.word-choice-btn.incorrect {
+  border-color: var(--error-color);
+  background: rgba(244, 67, 54, 0.1);
+}
+
+/* --- POIŠČI ČRKO V BESEDAH --- */
+.letter-target-card {
+  width: 88px;
+  height: 88px;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 27px, rgba(36, 82, 122, 0.16) 28px 29px),
+    #ffffff;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+.letter-search-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 640px;
+}
+
+.letter-search-word {
+  min-height: 56px;
+  font-size: 1.25rem;
+}
+
+.letter-search-word.selected {
+  border-color: var(--accent-color);
+  background: #fff3df;
+  box-shadow: inset 0 -4px 0 rgba(217, 108, 59, 0.25), 0 4px 8px var(--shadow-color);
+}
+
+/* --- UREDI POVED --- */
+.sentence-order-container,
+.number-sequence-container,
+.ten-pair-container,
+.math-story-container,
+.measurement-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.sentence-drop-row,
+.sentence-word-bank {
+  width: 100%;
+  max-width: 720px;
+  min-height: 76px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sentence-word-bank {
+  border-style: solid;
+  background: #f8fbff;
+}
+
+.sentence-placeholder {
+  font-size: 1.05rem;
+  font-weight: 600;
+  opacity: 0.72;
+}
+
+.sentence-chip {
+  font-family: var(--font-family);
+  min-height: 48px;
+  padding: 8px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.sentence-chip.selected {
+  border-color: var(--primary-color);
+  background: #eef6ff;
+}
+
+.sentence-drop-row.correct {
+  border-color: var(--success-color);
+  background: rgba(76, 175, 80, 0.1);
+}
+
+/* --- IGRA 4: KJE SLIŠIŠ GLAS --- */
+.sound-instruction-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.sound-instruction-text span.letter-highlight {
+  color: var(--accent-color);
+  background: rgba(255, 152, 0, 0.1);
+  padding: 2px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-color);
+}
+
+.circles-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.sound-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  background: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.sound-circle:hover {
+  transform: scale(1.1);
+  border-color: var(--primary-light);
+}
+
+.sound-circle.selected {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--primary-light);
+}
+
+.sound-circle.incorrect-guess {
+  background: var(--error-color);
+  border-color: var(--error-color);
+  animation: shake 0.5s ease-in-out;
+}
+
+.sound-circle.correct-guess {
+  background: var(--success-color);
+  border-color: var(--success-color);
+  animation: success-bounce 0.5s ease-in-out;
+}
+
+/* --- SLOVENŠČINA NOVO: IGRA 5: ZLOGOVANJE Z BOBNOM 🥁 --- */
+.drum-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.drum-beats-display {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.drum-beat-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.drum-beat-dot.active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  transform: scale(1.2);
+  box-shadow: 0 0 8px var(--accent-color);
+}
+
+.giant-drum-btn {
+  font-size: 6rem;
+  background: var(--card-bg);
+  border: 4px solid var(--border-color);
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 20px var(--shadow-color);
+  transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.giant-drum-btn:hover {
+  transform: scale(1.05);
+  border-color: var(--accent-color);
+}
+
+.giant-drum-btn:active {
+  transform: scale(0.9) translateY(4px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.drum-controls {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.drum-action-btn {
+  font-family: var(--font-family);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drum-action-btn.check {
+  background: var(--success-color);
+  color: white;
+  border-color: var(--success-color);
+}
+
+.drum-action-btn.reset {
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+.drum-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+/* --- MATEMATIKA IGRA 1: RAČUNANJE S SLIKICAMI --- */
+.math-calc-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.calc-visual-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.visual-items-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  align-content: center;
+  max-width: 150px;
+  min-height: 120px;
+  padding: 15px;
+  background: rgba(0,0,0,0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.calc-operator {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.visual-item-emoji {
+  font-size: 2.2rem;
+}
+
+.calc-numerical-row {
+  font-size: 2.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.calc-answer-slot {
+  width: 70px;
+  height: 70px;
+  border: 3px dashed var(--primary-color);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+.calc-choices-container {
+  display: flex;
+  gap: 15px;
+}
+
+.calc-choice-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.calc-choice-btn:hover {
+  transform: translateY(-4px);
+  background: var(--primary-light);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* --- MATEMATIKA IGRA 2: KROKODILJA TEHTNICA --- */
+.crocodile-scale-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.css-scale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.scale-plate {
+  width: 180px;
+  min-height: 130px;
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 6px 12px var(--shadow-color);
+  transition: transform 0.5s ease;
+}
+
+.scale-plate-count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 10px;
+  background: rgba(0,0,0,0.05);
+  padding: 2px 10px;
+  border-radius: 8px;
+}
+
+.scale-plate-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+}
+
+.scale-plate-emoji {
+  font-size: 1.8rem;
+}
+
+.scale-center-slot {
+  width: 100px;
+  height: 100px;
+  border: 3px dashed var(--accent-color);
+  border-radius: 20px;
+  background: rgba(255, 152, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.scale-center-slot.filled {
+  border-style: solid;
+  border-color: var(--accent-color);
+  background: var(--card-bg);
+  animation: success-bounce 0.5s ease;
+}
+
+.croc-choices-row {
+  display: flex;
+  gap: 20px;
+}
+
+.croc-choice-card {
+  width: 110px;
+  height: 90px;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 5px;
+}
+
+.croc-choice-card:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--accent-color);
+}
+
+.croc-choice-symbol {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.croc-choice-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+/* --- MATEMATIKA IGRA 3: DOPOLNI GOSENICO --- */
+.caterpillar-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.caterpillar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  padding: 10px;
+}
+
+.caterpillar-body {
+  display: flex;
+  align-items: center;
+}
+
+.caterpillar-head {
+  width: 80px;
+  height: 80px;
+  background-image: url('assets/images/caterpillar.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: -10px;
+  z-index: 10;
+  position: relative;
+}
+
+.caterpillar-head.fallback {
+  background-image: none;
+  background: #a5d6a7;
+  border: 3px solid #2e7d32;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.caterpillar-segment {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  margin-left: -8px;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.caterpillar-segment.target {
+  border: 3px dashed var(--accent-color);
+  background: rgba(255, 152, 0, 0.05);
+  color: var(--accent-color);
+  z-index: 6;
+}
+
+.caterpillar-segment.target.filled {
+  border-style: solid;
+  border-color: var(--success-color);
+  background: var(--success-color);
+  color: white;
+}
+
+.caterpillar-choices {
+  display: flex;
+  gap: 15px;
+}
+
+.caterpillar-choice-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caterpillar-choice-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--accent-color);
+  background: rgba(255, 152, 0, 0.1);
+}
+
+/* --- DODATNE MATEMATIČNE PREDLOGE --- */
+.number-sequence-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.number-sequence-cell,
+.flower-number {
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.number-sequence-cell.target,
+.flower-number.target {
+  border-style: dashed;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.number-sequence-cell.filled,
+.flower-number.filled,
+.calc-choice-btn.correct-answer {
+  border-color: var(--success-color);
+  background: var(--success-color);
+  color: white;
+}
+
+.flower-pair {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.flower-number {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #fff8d5 0 42%, transparent 43%),
+    conic-gradient(#ff8a80, #ffd54f, #81c784, #64b5f6, #ba68c8, #ff8a80);
+}
+
+.story-text {
+  max-width: 660px;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  font-weight: 700;
+  text-align: center;
+}
+
+.story-equation {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 10px 18px;
+  background: #ffffff;
+}
+
+.measurement-visual {
+  width: 100%;
+  max-width: 680px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.measurement-item {
+  min-height: 150px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.measurement-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.measurement-object {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.measure-bar {
+  height: 22px;
+  min-width: 28px;
+  border-radius: 999px;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.16);
+}
+
+.liquid-cup {
+  width: 72px;
+  height: 92px;
+  border: 3px solid var(--border-color);
+  border-top: 0;
+  border-radius: 0 0 16px 16px;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.3rem;
+}
+
+.liquid-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(33, 150, 243, 0.45);
+}
+
+.liquid-cup span {
+  position: relative;
+  z-index: 1;
+}
+
+.weight-object {
+  font-size: 3.4rem;
+  transition: transform 0.2s ease;
+}
+
+.weight-line {
+  width: 80%;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--border-color);
+  margin: 0 auto;
+}
+
+/* --- MATEMATIKA NOVO: IGRA 5: ŠTEVILSKI LABIRINT (MAZE) 🚀 --- */
+.maze-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.maze-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  width: 100%;
+  max-width: 320px;
+  margin: 10px 0;
+}
+
+.maze-node {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.maze-node:hover {
+  transform: scale(1.08);
+  border-color: var(--accent-color);
+}
+
+.maze-node.correct {
+  background: var(--success-color);
+  border-color: var(--success-color);
+  color: white;
+  box-shadow: 0 0 10px var(--success-color);
+}
+
+.maze-node.incorrect {
+  background: var(--error-color);
+  border-color: var(--error-color);
+  color: white;
+  animation: shake 0.5s ease;
+}
+
+/* --- ČESTITKE IN PREHOD NA NASLEDNJO NALOGO --- */
+.feedback-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  animation: fadeIn 0.4s ease;
+}
+
+.feedback-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--success-color);
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.next-task-btn {
+  font-family: var(--font-family);
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(255, 152, 0, 0.3);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.next-task-btn:hover {
+  transform: scale(1.05);
+  background: #f57c00;
+  box-shadow: 0 8px 16px rgba(255, 152, 0, 0.4);
+}
+
+/* --- ANIMACIJE --- */
+@keyframes starPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); filter: drop-shadow(0 0 5px #ffd700); }
+}
+
+@keyframes floatEmoji {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes success-bounce {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.25) translateY(-15px); }
+  50% { transform: scale(0.9) translateY(0); }
+  75% { transform: scale(1.05) translateY(-5px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-bounce {
+  animation: success-bounce 0.6s ease-in-out;
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  h1 { font-size: 1.5rem; }
+  .main-menu-grid { grid-template-columns: 1fr; }
+  .game-section-grid { grid-template-columns: 1fr; }
+  .matching-columns-container { gap: 20px; }
+  .css-scale { flex-direction: column; gap: 30px; }
+  .scale-plate { width: 100%; max-width: 250px; }
+  .visual-instruction-banner { font-size: 1.2rem; }
+  .measurement-visual { grid-template-columns: 1fr; }
+}

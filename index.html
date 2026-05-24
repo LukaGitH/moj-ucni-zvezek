@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moj učni zvezek - vaje iz slovenščine in matematike</title>
+  <meta name="description" content="Mirna interaktivna učna aplikacija za prvošolce. Vaje s črkami, besedami, glasovi, štetjem in vzorci.">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- GLAVA APLIKACIJE -->
+  <header>
+    <div class="logo-container">
+      <img src="assets/images/logo.png" alt="Moj učni zvezek logo" class="logo-img" id="logo-img">
+      <h1 id="header-title">Moj učni zvezek</h1>
+    </div>
+    
+    <div class="header-controls">
+      <!-- ŠTEVEC ZVEZDIC (NAGRADA) -->
+      <div class="stars-counter" id="stars-counter" title="Tvoje zvezdice!">
+        <span class="star-icon">⭐</span>
+        <span id="stars-count">0</span>
+      </div>
+
+      <!-- IZBIRA TEME -->
+      <div class="theme-selector">
+        <select id="theme-selector" title="Izberi preobleko">
+          <option value="forest">Zvezek</option>
+          <option value="space">Vesolje 🚀</option>
+          <option value="dino">Dinozavri 🦖</option>
+          <option value="ocean">Ocean 🌊</option>
+        </select>
+      </div>
+
+      <!-- VKLOP/IZKLOP ZVOČNIH EFEKTOV (SFX) -->
+      <button id="sound-toggle" class="control-btn" title="Zvočni učinki vklopljeni">🔊</button>
+    </div>
+  </header>
+
+  <!-- OSREDNJI PANEL -->
+  <main id="app-container">
+    
+    <!-- 1. ZASLON: GLAVNI MENI -->
+    <section id="main-menu" class="main-menu-grid">
+      <div class="menu-card slovenscina" id="menu-card-slovenscina" data-subject="slovenscina">
+        <div class="menu-icon">Aa</div>
+        <h2>Slovenščina</h2>
+        <p>Črke, glasovi, besede in povezovanje</p>
+      </div>
+      <div class="menu-card matematika" id="menu-card-matematika" data-subject="matematika">
+        <div class="menu-icon">1 2</div>
+        <h2>Matematika</h2>
+        <p>Štetje, računanje, primerjanje in vzorci</p>
+      </div>
+    </section>
+
+    <!-- 2. ZASLON: PODMENI ZA IZBIRO IGER -->
+    <section id="submenu" class="submenu-container hidden">
+      <button id="submenu-back-btn" class="back-btn">⬅️ Nazaj</button>
+      <h2 id="submenu-title" style="font-size: 2rem; font-weight: 700;">Izberi igro</h2>
+      <div class="game-select-grid" id="game-select-grid">
+        <!-- Dinamične kartice iger se naložijo sem -->
+      </div>
+    </section>
+
+    <!-- 3. ZASLON: IGRALNO OBMOČJE -->
+    <section id="game-arena" class="game-play-container hidden">
+      <div class="game-header">
+        <button id="game-back-btn" class="back-btn">⬅️ Druge igre</button>
+        <span class="game-title" id="current-game-title">Igra</span>
+        <div style="width: 44px;"></div> <!-- Spacer za poravnavo -->
+      </div>
+
+      <!-- VIZUALNO NAVODILO ZA OTROKA -->
+      <div class="visual-instruction-banner" id="visual-instruction-banner">
+        Preberi navodilo!
+      </div>
+      
+      <!-- OSREDNJE IGRALNO VSEBINO -->
+      <div class="game-canvas" id="game-canvas">
+        <!-- Tukaj se dinamično generira koda posamezne igre -->
+      </div>
+
+      <!-- POVRATNA INFORMACIJA (Čestitke, Napačno, Naslednja naloga) -->
+      <div id="feedback-container" class="feedback-overlay hidden">
+        <div class="feedback-text" id="feedback-text">Čudovito! Pravilno! 🌟</div>
+        <button id="next-task-btn" class="next-task-btn">Naprej ➡️</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NALAGANJE PODATKOV IN PROGRAMSKE LOGIKE -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
