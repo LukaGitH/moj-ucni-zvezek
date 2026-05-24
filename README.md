@@ -32,6 +32,7 @@ http://localhost:8000
 - `app.js` - logika menijev, nalog, preverjanja in točkovanja
 - `assets/` - javne slike in grafični viri aplikacije
 - `PRIVACY.md` - kratek opis zasebnosti
+- `AGENTS.md` - navodila za prihodnje delo v novih sejah
 
 Fotografije zvezkov niso vključene v javni repozitorij.
 
