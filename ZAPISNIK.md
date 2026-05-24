@@ -39,6 +39,8 @@ Za osnovni deploy ni potreben backend.
 - Pravilni odgovor samodejno prestavi na naslednjo nalogo po 1.5 sekunde.
 - Naloga se po pravilnem odgovoru zaklene, da ne dodeli več zvezdic za isti odgovor.
 - Dodan je `.gitignore`, da se lokalne referenčne fotografije ne naložijo po nesreči.
+- Števec zvezdic omogoča reset rezultata po potrditvi.
+- Dodan je `PRIVACY.md` z opisom lokalnega shranjevanja podatkov.
 
 ## Podprti tipi nalog
 
@@ -115,17 +117,23 @@ Dodatno je bila uporabljena ročna validacija podatkov za:
 - računske zgodbe,
 - številska zaporedja.
 
-## Deploy načrt
+## Deploy
 
-Ker je aplikacija statična, je najpreprostejši deploy prek GitHub Pages.
+Aplikacija je statična in je objavljena prek GitHub Pages.
 
-Predlagan GitHub repo:
+Repozitorij:
 
 ```text
-moj-ucni-zvezek
+https://github.com/LukaGitH/moj-ucni-zvezek
 ```
 
-Za deploy naj bodo v repozitoriju:
+Javna stran:
+
+```text
+https://lukagith.github.io/moj-ucni-zvezek/
+```
+
+V repozitoriju so:
 
 - `index.html`
 - `index.css`
@@ -134,6 +142,7 @@ Za deploy naj bodo v repozitoriju:
 - `assets/`
 - `README.md`
 - `ZAPISNIK.md`
+- `PRIVACY.md`
 
 Referenčnih fotografij zvezkov ni treba naložiti, ker niso potrebne za delovanje aplikacije.
 
@@ -154,9 +163,8 @@ javascript
 
 ## Naslednji smiselni koraki
 
-- Inicializirati Git repo.
-- Ustvariti GitHub repo `moj-ucni-zvezek`.
-- Naložiti aplikacijo na GitHub.
-- Vklopiti GitHub Pages.
 - Nadaljevati z dodajanjem preverjenih nalog v `data.js`.
+- Dodati več primerov za posamezne tipe vaj, posebej za daljše ponavljanje.
+- Ročno preveriti izkušnjo na telefonu in tablici.
+- Po potrebi dodati `LICENSE`, ko bo odločeno, pod katerimi pogoji se lahko koda in vsebina ponovno uporabljata.
 - Po potrebi kasneje dodati profile otrok in shranjevanje napredka na server.
