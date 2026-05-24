@@ -18,6 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("stars-count").textContent = starsCount;
   updateSoundToggleButton();
 
+  const starsCounter = document.getElementById("stars-counter");
+  starsCounter.addEventListener("click", resetStarsWithConfirmation);
+  starsCounter.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      resetStarsWithConfirmation();
+    }
+  });
+
   // --- AUDIO SYNTHESIS (Spletni sintesajzer zvokov) ---
   // Ustvarimo zvoke preko Web Audio API, da ne potrebujemo zunanjih zvočnih datotek
   function getAudioContext() {
@@ -127,6 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {
       console.log("AudioContext ne deluje.", e);
     }
+  }
+
+  function resetStarsWithConfirmation() {
+    if (starsCount === 0) return;
+    const shouldReset = window.confirm("Ali želiš resetirati rezultat in začeti z 0 zvezdicami?");
+    if (!shouldReset) return;
+
+    starsCount = 0;
+    localStorage.setItem("starsCount", starsCount);
+    document.getElementById("stars-count").textContent = starsCount;
   }
 
   // --- POMOŽNI ALGORITMI ---

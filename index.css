@@ -141,6 +141,13 @@ h1 {
   border: 2px solid #ffd700;
   color: #d4af37;
   box-shadow: 0 4px 10px rgba(255, 215, 0, 0.15);
+  cursor: pointer;
+  user-select: none;
+}
+
+.stars-counter:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
 }
 
 .star-icon {
